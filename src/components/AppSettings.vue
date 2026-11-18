@@ -138,6 +138,9 @@
 				</NcButton>
 			</div>
 		</NcAppSettingsSection>
+		<NcAppSettingsSection v-if="editable" id="pdf-templates" :name="t('PDF templates')">
+			<PdfTemplatesEditor />
+		</NcAppSettingsSection>
 	</NcAppSettingsDialog>
 </template>
 
@@ -145,6 +148,7 @@
 import type { PdfLayoutProfile } from '@/utils/pdfLayoutSettings'
 
 import { showError } from '@nextcloud/dialogs'
+import { loadState } from '@nextcloud/initial-state'
 import { computed, defineModel, onMounted, ref } from 'vue'
 import NcAppSettingsDialog from '@nextcloud/vue/components/NcAppSettingsDialog'
 import NcAppSettingsSection from '@nextcloud/vue/components/NcAppSettingsSection'
@@ -153,6 +157,7 @@ import NcFormGroup from '@nextcloud/vue/components/NcFormGroup'
 import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
 import NcSelect from '@nextcloud/vue/components/NcSelect'
 import NcTextField from '@nextcloud/vue/components/NcTextField'
+import PdfTemplatesEditor from '@/components/PdfTemplatesEditor.vue'
 import { ConfirmIcon } from '@/icons/vue-material'
 import { useAppSettingsStore } from '@/stores/appSettingsStore'
 import { useFolderCollectionsStore } from '@/stores/folderCollectionsStore'
@@ -166,6 +171,7 @@ import {
 	restrictToTimeFormat as restrictInputToTimeFormat,
 } from '@/utils/timeFormatUtils'
 const open = defineModel<boolean>({ default: false })
+const editable = loadState<boolean>('orchestrascoresmanager', 'editable', false)
 const pdfProfiles = ref<PdfLayoutProfile[]>([])
 const isSavingPdfProfiles = ref(false)
 
