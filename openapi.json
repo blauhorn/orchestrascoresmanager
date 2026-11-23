@@ -221,6 +221,8 @@
                     "digitalStatus",
                     "gemaIds",
                     "duration",
+                    "tempoBpm",
+                    "musicalKey",
                     "tags",
                     "scoreBook"
                 ],
@@ -290,6 +292,15 @@
                     "duration": {
                         "type": "integer",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "tempoBpm": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "musicalKey": {
+                        "type": "string",
                         "nullable": true
                     },
                     "tags": {
@@ -543,6 +554,8 @@
                     "digitalStatus",
                     "gemaIds",
                     "duration",
+                    "tempoBpm",
+                    "musicalKey",
                     "tags",
                     "scoreBook",
                     "index"
@@ -613,6 +626,15 @@
                     "duration": {
                         "type": "integer",
                         "format": "int64",
+                        "nullable": true
+                    },
+                    "tempoBpm": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "musicalKey": {
+                        "type": "string",
                         "nullable": true
                     },
                     "tags": {
@@ -4116,6 +4138,19 @@
                                         "default": null,
                                         "description": "The duration of the score in seconds"
                                     },
+                                    "tempoBpm": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "nullable": true,
+                                        "default": null,
+                                        "description": "The tempo in beats per minute"
+                                    },
+                                    "musicalKey": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "default": null,
+                                        "description": "The concert-pitch musical key (free text)"
+                                    },
                                     "tagIds": {
                                         "type": "array",
                                         "nullable": true,
@@ -4347,6 +4382,19 @@
                                         "nullable": true,
                                         "default": null,
                                         "description": "The duration of the score in seconds"
+                                    },
+                                    "tempoBpm": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "nullable": true,
+                                        "default": null,
+                                        "description": "The tempo in beats per minute"
+                                    },
+                                    "musicalKey": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "default": null,
+                                        "description": "The concert-pitch musical key (free text)"
                                     },
                                     "tagIds": {
                                         "type": "array",
