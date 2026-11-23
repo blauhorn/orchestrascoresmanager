@@ -37,6 +37,10 @@ use OCP\DB\Types;
  * @method string|null getMedleyContents()
  * @method int|null getDuration()
  * @method void setDuration(?int $value)
+ * @method int|null getTempoBpm()
+ * @method void setTempoBpm(?int $value)
+ * @method string|null getMusicalKey()
+ * @method void setMusicalKey(?string $value)
  */
 class Score extends Entity implements JsonSerializable {
 	protected string $title = '';
@@ -52,6 +56,8 @@ class Score extends Entity implements JsonSerializable {
 	protected ?string $digitalStatus = null;
 	protected ?string $gemaIds = null;
 	protected ?int $duration = null;
+	protected ?int $tempoBpm = null;
+	protected ?string $musicalKey = null;
 
 	// transient properties, not stored in DB
 	// ensure to add setters & getters for these
@@ -73,6 +79,8 @@ class Score extends Entity implements JsonSerializable {
 		$this->addType('digitalStatus', Types::STRING);
 		$this->addType('gemaIds', Types::STRING);
 		$this->addType('duration', Types::INTEGER);
+		$this->addType('tempoBpm', Types::INTEGER);
+		$this->addType('musicalKey', Types::STRING);
 	}
 
 	public function jsonSerialize(): array {
@@ -93,6 +101,8 @@ class Score extends Entity implements JsonSerializable {
 			'tags' => $this->tags ?? [],
 			'scoreBook' => $this->scoreBook,
 			'duration' => $this->duration,
+			'tempoBpm' => $this->tempoBpm,
+			'musicalKey' => $this->musicalKey,
 		];
 	}
 

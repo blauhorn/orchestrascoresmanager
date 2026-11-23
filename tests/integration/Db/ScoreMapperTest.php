@@ -88,6 +88,26 @@ final class ScoreMapperTest extends MapperTestCase {
 		$this->assertSame(5, $bookInfo['index']);
 	}
 
+	public function testMusicMetadataPersistsAndCanBeCleared(): void {
+		$score = new Score();
+		$score->setTitle('Music Metadata Test');
+		$score->setTempoBpm(160);
+		$score->setMusicalKey('Es-Dur');
+		$inserted = $this->mapper->insert($score);
+
+		$found = $this->mapper->find($inserted->getId());
+		$this->assertSame(160, $found->getTempoBpm());
+		$this->assertSame('Es-Dur', $found->getMusicalKey());
+
+		$found->setTempoBpm(null);
+		$found->setMusicalKey(null);
+		$this->mapper->update($found);
+
+		$reloaded = $this->mapper->find($inserted->getId());
+		$this->assertNull($reloaded->getTempoBpm());
+		$this->assertNull($reloaded->getMusicalKey());
+	}
+
 	public function testFindAll(): void {
 		$tag1 = $this->createTestTag('classical');
 		$tag2 = $this->createTestTag('modern');

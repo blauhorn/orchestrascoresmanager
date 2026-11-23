@@ -464,6 +464,12 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
+msgid "Tempo (bpm)"
+msgstr ""
+
+msgid "Musical Key"
+msgstr ""
+
 msgid "Medley Contents"
 msgstr ""
 

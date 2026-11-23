@@ -127,6 +127,17 @@ final class ScoreApiControllerTest extends TestCase {
 		$this->assertEquals(Http::STATUS_CREATED, $response->getStatus());
 	}
 
+	public function testPostScorePassesTempoAndMusicalKey(): void {
+		$created = new Score();
+		$created->setTitle('Test');
+		$this->scoreService->expects($this->once())
+			->method('createScore')
+			->with($this->callback(static fn (Score $score): bool => $score->getTempoBpm() === 120 && $score->getMusicalKey() === 'F-Dur'))
+			->willReturn($created);
+
+		$this->controller->postScore(title: 'Test', tempoBpm: 120, musicalKey: 'F-Dur');
+	}
+
 	public function testPostScoreWithTagIdsAndScoreBook(): void {
 		$score = new Score();
 		$score->setId(1);
@@ -165,6 +176,27 @@ final class ScoreApiControllerTest extends TestCase {
 		$this->expectExceptionMessage($message);
 
 		$this->controller->postScore(title: 'Test');
+	}
+
+	public function testPatchScoreClearsMusicMetadata(): void {
+		$score = new Score();
+		$score->setId(1);
+		$score->setTitle('Test');
+		$score->setTempoBpm(120);
+		$score->setMusicalKey('C-Dur');
+
+		$this->scoreService->method('getScoreById')->willReturn($score);
+		$this->request->method('getParams')->willReturn([
+			'id' => 1,
+			'tempoBpm' => null,
+			'musicalKey' => null,
+		]);
+		$this->scoreService->expects($this->once())
+			->method('updateScore')
+			->with($this->callback(static fn (Score $updated): bool => $updated->getTempoBpm() === null && $updated->getMusicalKey() === null))
+			->willReturn($score);
+
+		$this->controller->patchScore(id: 1, tempoBpm: null, musicalKey: null);
 	}
 
 	public function testPatchScoreUpdatesExistingScore(): void {

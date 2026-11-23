@@ -135,6 +135,8 @@ const DEFAULT_ENABLED_IDS: computed<ReadonlySet<PdfColumnId>> = computed(() => {
 		'duration',
 		'fcvIndex',
 		'title',
+		'tempoBpm',
+		'musicalKey',
 	])
 	if (hasAnyComment.value) {
 		enabledIds.add('comment')

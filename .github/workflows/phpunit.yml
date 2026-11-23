@@ -162,7 +162,22 @@ jobs:
         working-directory: apps/${{ env.APP_NAME }}
         run: composer run test:unit:coverage
 
+      # Codecov requires a repository token for this fork. Keep PHPUnit mandatory
+      # while skipping the optional coverage upload if the secret is not configured.
+      - name: Check whether Codecov upload is configured
+        id: codecov-config
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          if [ -n "$CODECOV_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "Codecov upload skipped: CODECOV_TOKEN is not configured."
+          fi
+
       - name: Upload coverage to Codecov
+        if: steps.codecov-config.outputs.enabled == 'true'
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

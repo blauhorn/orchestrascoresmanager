@@ -133,6 +133,8 @@ OC.L10N.register(
     "Year" : "Jahr",
     "Difficulty" : "Schwierigkeit",
     "Duration" : "Spieldauer",
+    "Tempo (bpm)" : "Tempo (bpm)",
+    "Musical Key" : "Tonart",
     "Medley Contents" : "Medley-Inhalt",
     "GEMA IDs" : "GEMA-IDs",
     "Defects" : "Mängel",

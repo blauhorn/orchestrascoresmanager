@@ -22,6 +22,8 @@ namespace OCA\OrchestraScoresManager;
  *     digitalStatus: string|null,
  *     gemaIds: list<string>|null,
  *     duration: int|null,
+ *     tempoBpm: int|null,
+ *     musicalKey: string|null,
  *     tags: list<string>|null,
  *     scoreBook: OrchestraScoresManagerScoreBookInfo|null,
  *     viaScoreBook?: true
@@ -41,6 +43,8 @@ namespace OCA\OrchestraScoresManager;
  *     digitalStatus: string|null,
  *     gemaIds: list<string>|null,
  *     duration: int|null,
+ *     tempoBpm: int|null,
+ *     musicalKey: string|null,
  *     tags: list<string>|null,
  *     scoreBook: OrchestraScoresManagerScoreBookInfo|null,
  *     viaScoreBook?: true,

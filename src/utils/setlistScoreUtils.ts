@@ -12,7 +12,7 @@ import { t } from '@/utils/l10n'
  * Score-information fields that can be resolved from a setlist entry.
  * Matches the colId values used in SetlistEntriesTable and the PdfColumnId entries in pdf-exporter.
  */
-export type ScoreInfoField = 'title' | 'difficulty' | 'bookName' | 'bookIndex' | 'fcvIndex' | 'gemaIds'
+export type ScoreInfoField = 'title' | 'difficulty' | 'tempoBpm' | 'musicalKey' | 'bookName' | 'bookIndex' | 'fcvIndex' | 'gemaIds'
 
 /**
  * Check if a setlist entry is a break entry.
@@ -59,6 +59,10 @@ export function resolveScoreField(
 			return score.title
 		case 'difficulty':
 			return score.difficulty ?? null
+		case 'tempoBpm':
+			return score.tempoBpm ?? null
+		case 'musicalKey':
+			return score.musicalKey ?? null
 		case 'bookName':
 			if (score.scoreBook?.id) {
 				return getScoreBookById(score.scoreBook.id)?.title ?? null
