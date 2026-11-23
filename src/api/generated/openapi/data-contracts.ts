@@ -90,6 +90,9 @@ export interface Score {
   gemaIds: string[] | null;
   /** @format int64 */
   duration: number | null;
+  /** @format int64 */
+  tempoBpm: number | null;
+  musicalKey: string | null;
   tags: string[] | null;
   scoreBook: ScoreBookInfo | null;
   viaScoreBook?: true;
@@ -174,6 +177,9 @@ export interface ScoreIndexed {
   gemaIds: string[] | null;
   /** @format int64 */
   duration: number | null;
+  /** @format int64 */
+  tempoBpm: number | null;
+  musicalKey: string | null;
   tags: string[] | null;
   scoreBook: ScoreBookInfo | null;
   viaScoreBook?: true;
@@ -525,6 +531,17 @@ export interface ScoreApiPostScorePayload {
    */
   duration?: number | null;
   /**
+   * The tempo in beats per minute
+   * @format int64
+   * @default null
+   */
+  tempoBpm?: number | null;
+  /**
+   * The concert-pitch musical key (free text)
+   * @default null
+   */
+  musicalKey?: string | null;
+  /**
    * optional list of tag ids to link
    * @default null
    */
@@ -617,6 +634,17 @@ export interface ScoreApiPatchScorePayload {
    * @default null
    */
   duration?: number | null;
+  /**
+   * The tempo in beats per minute
+   * @format int64
+   * @default null
+   */
+  tempoBpm?: number | null;
+  /**
+   * The concert-pitch musical key (free text)
+   * @default null
+   */
+  musicalKey?: string | null;
   /**
    * optional list of tag ids to link
    * @default null

@@ -1,6 +1,8 @@
 OC.L10N.register(
     "orchestrascoresmanager",
     {
+    "Tempo (bpm)" : "Tempo (bpm)",
+    "Musical Key" : "Tonart",
     "Insufficient permissions" : "Unzureichende Berechtigungen",
     "Folder collection not found" : "Ordnersammlung nicht gefunden",
     "No active version exists for this folder collection" : "Es existiert keine aktive Version für diese Ordnersammlung",
