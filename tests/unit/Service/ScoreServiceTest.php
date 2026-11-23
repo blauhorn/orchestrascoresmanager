@@ -356,6 +356,27 @@ final class ScoreServiceTest extends TestCase {
 		$this->assertSame($createdScore, $result);
 	}
 
+	public function testCreateScoreRejectsInvalidTempo(): void {
+		$score = new Score();
+		$score->setTitle('Test Score');
+		$score->setTempoBpm(0);
+		$this->scoreMapper->expects($this->never())->method('insert');
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Tempo must be between 1 and 999 bpm');
+		$this->service->createScore($score);
+	}
+
+	public function testUpdateScoreRejectsInvalidTempo(): void {
+		$score = new Score();
+		$score->setId(1);
+		$score->setTempoBpm(1000);
+		$this->scoreMapper->expects($this->never())->method('update');
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->service->updateScore($score);
+	}
+
 	public function testUpdateScoreRequiresAuthorization(): void {
 		$score = new Score();
 		$score->setId(1);

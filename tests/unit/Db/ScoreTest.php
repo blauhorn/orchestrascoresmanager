@@ -154,6 +154,22 @@ final class ScoreTest extends TestCase {
 		$this->assertNull($score->getScoreBook());
 	}
 
+	public function testMusicMetadataSerialization(): void {
+		$score = new Score();
+		$score->setTempoBpm(144);
+		$score->setMusicalKey('B♭ major');
+
+		$this->assertSame(144, $score->getTempoBpm());
+		$this->assertSame('B♭ major', $score->getMusicalKey());
+		$this->assertSame(144, $score->jsonSerialize()['tempoBpm']);
+		$this->assertSame('B♭ major', $score->jsonSerialize()['musicalKey']);
+
+		$score->setTempoBpm(null);
+		$score->setMusicalKey(null);
+		$this->assertNull($score->jsonSerialize()['tempoBpm']);
+		$this->assertNull($score->jsonSerialize()['musicalKey']);
+	}
+
 	public function testJsonSerializeWithAllFields(): void {
 		$score = new Score();
 		$score->setId(1);

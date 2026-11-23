@@ -88,6 +88,8 @@ class ScoreApiController extends OCSController {
 	 * @param string|null $digitalStatus The digital status of the score
 	 * @param list<string>|null $gemaIds The GEMA IDs of the score
 	 * @param int|null $duration The duration of the score in seconds
+	 * @param int|null $tempoBpm The tempo in beats per minute
+	 * @param string|null $musicalKey The concert-pitch musical key (free text)
 	 * @param list<int>|null $tagIds optional list of tag ids to link
 	 * @param array{id: int, index: int}|null $scoreBook Score book info with id and index (both required)
 	 *
@@ -114,6 +116,8 @@ class ScoreApiController extends OCSController {
 		?string $digitalStatus = null,
 		?array $gemaIds = null,
 		?int $duration = null,
+		?int $tempoBpm = null,
+		?string $musicalKey = null,
 		?array $tagIds = null,
 		?array $scoreBook = null,
 	): DataResponse {
@@ -131,6 +135,8 @@ class ScoreApiController extends OCSController {
 			'digitalStatus' => $digitalStatus,
 			'gemaIds' => $gemaIds,
 			'duration' => $duration,
+			'tempoBpm' => $tempoBpm,
+			'musicalKey' => $musicalKey,
 		]);
 
 		// Build score book info if provided
@@ -164,6 +170,8 @@ class ScoreApiController extends OCSController {
 	 * @param string|null $digitalStatus The digital status of the score
 	 * @param list<string>|null $gemaIds The GEMA IDs of the score
 	 * @param int|null $duration The duration of the score in seconds
+	 * @param int|null $tempoBpm The tempo in beats per minute
+	 * @param string|null $musicalKey The concert-pitch musical key (free text)
 	 * @param list<int>|null $tagIds optional list of tag ids to link
 	 * @param array{id?: int, index?: int}|null $scoreBook Score book info (id and/or index). Set id to null to remove from book.
 	 *
@@ -194,6 +202,8 @@ class ScoreApiController extends OCSController {
 		?string $digitalStatus = null,
 		?array $gemaIds = null,
 		?int $duration = null,
+		?int $tempoBpm = null,
+		?string $musicalKey = null,
 		?array $tagIds = null,
 		?array $scoreBook = null,
 	): DataResponse {

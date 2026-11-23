@@ -119,6 +119,7 @@ class ScoreService {
 	 */
 	public function createScore(Score $score, ?array $tagIds = null, ?array $scoreBookInfo = null): Score {
 		$this->authorizationService->authorizePolicy($this->scorePolicy, PolicyInterface::ACTION_CREATE);
+		$this->validateMusicMetadata($score);
 
 		$created = $this->scoreMapper->insert($score);
 		if ($tagIds !== null) {
@@ -154,6 +155,7 @@ class ScoreService {
 	 */
 	public function updateScore(Score $score, ?array $tagIds = null, ?array $scoreBookInfo = null): Score {
 		$this->authorizationService->authorizePolicy($this->scorePolicy, PolicyInterface::ACTION_UPDATE, $score);
+		$this->validateMusicMetadata($score);
 
 		if ($tagIds !== null) {
 			$validIds = array_map('intval', $tagIds);
@@ -183,6 +185,20 @@ class ScoreService {
 
 		// Reload to get all transient properties
 		return $this->scoreMapper->find($score->getId());
+	}
+
+	/**
+	 * Validate optional musical metadata before writing it to the database.
+	 */
+	private function validateMusicMetadata(Score $score): void {
+		$tempoBpm = $score->getTempoBpm();
+		if ($tempoBpm !== null && ($tempoBpm < 1 || $tempoBpm > 999)) {
+			throw new \InvalidArgumentException('Tempo must be between 1 and 999 bpm');
+		}
+		$musicalKey = $score->getMusicalKey();
+		if ($musicalKey !== null && mb_strlen($musicalKey) > 255) {
+			throw new \InvalidArgumentException('Musical key must not exceed 255 characters');
+		}
 	}
 
 	/**
