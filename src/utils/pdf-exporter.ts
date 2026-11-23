@@ -299,6 +299,11 @@ function getEntryCellValue(
 		if (Array.isArray(raw)) {
 			return raw.join(', ')
 		}
+		// jsPDF's built-in font does not support musical accidentals.
+		// Use ASCII equivalents so keys remain legible in exported PDFs.
+		if (columnId === 'musicalKey') {
+			return String(raw).replace(/♭/g, 'b').replace(/♯/g, '#').replace(/♮/g, '')
+		}
 		return String(raw)
 	}
 
