@@ -377,6 +377,17 @@ final class ScoreServiceTest extends TestCase {
 		$this->service->updateScore($score);
 	}
 
+	public function testCreateScoreRejectsOverlongMusicalKey(): void {
+		$score = new Score();
+		$score->setTitle('Test Score');
+		$score->setMusicalKey(str_repeat('A', 256));
+		$this->scoreMapper->expects($this->never())->method('insert');
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Musical key must not exceed 255 characters');
+		$this->service->createScore($score);
+	}
+
 	public function testUpdateScoreRequiresAuthorization(): void {
 		$score = new Score();
 		$score->setId(1);
