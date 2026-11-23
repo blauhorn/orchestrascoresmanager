@@ -25,6 +25,8 @@ export type PdfColumnId
 		| 'fcvIndex'
 		| 'title'
 		| 'difficulty'
+		| 'tempoBpm'
+		| 'musicalKey'
 		| 'bookName'
 		| 'bookIndex'
 		| 'comment'
@@ -239,6 +241,8 @@ function buildDefaultColumnConfigs(
 		cols.push({ id: 'fcvIndex', label: t('Index') })
 	}
 	cols.push({ id: 'title', label: t('Title') })
+	cols.push({ id: 'tempoBpm', label: t('Tempo (bpm)') })
+	cols.push({ id: 'musicalKey', label: t('Musical Key') })
 	if (!hasFolderCollectionVersion) {
 		cols.push({ id: 'bookName', label: t('Score Book') })
 		cols.push({ id: 'bookIndex', label: t('Book Index') })
@@ -252,7 +256,7 @@ function buildDefaultColumnConfigs(
  * These are forwarded to the shared utility; all other PdfColumnId values
  * are time-based or entry-level and are handled locally.
  */
-const SCORE_INFO_FIELDS = new Set<PdfColumnId>(['title', 'difficulty', 'fcvIndex', 'bookName', 'bookIndex', 'gemaIds'])
+const SCORE_INFO_FIELDS = new Set<PdfColumnId>(['title', 'difficulty', 'tempoBpm', 'musicalKey', 'fcvIndex', 'bookName', 'bookIndex', 'gemaIds'])
 
 /**
  * Return the string cell value for a given column and entry.

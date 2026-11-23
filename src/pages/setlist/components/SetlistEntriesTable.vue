@@ -427,6 +427,23 @@ const columnDefs = computed<ColDef[]>(() => {
 		hide: fullModeColumnIsHidden.value,
 	})
 
+	cols.push({
+		headerName: t('Tempo (bpm)'),
+		colId: 'tempoBpm' satisfies PdfColumnId,
+		valueGetter: scoreInfoValueGetter('tempoBpm'),
+		filter: 'agNumberColumnFilter',
+		editable: false,
+		hide: fullModeColumnIsHidden.value,
+	})
+
+	cols.push({
+		headerName: t('Musical Key'),
+		colId: 'musicalKey' satisfies PdfColumnId,
+		valueGetter: scoreInfoValueGetter('musicalKey'),
+		editable: false,
+		hide: fullModeColumnIsHidden.value,
+	})
+
 	// Add score book columns if setlist has no folder collection version
 	if (!hasFolderCollectionVersion.value) {
 		cols.push({

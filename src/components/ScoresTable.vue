@@ -589,6 +589,19 @@ const columnDefs = computed<ColDef[]>(() => {
 			valueGetter: createInheritableValueGetter('difficulty'),
 		},
 		createDurationColumn('duration', t('Duration')),
+		{
+			field: 'tempoBpm',
+			headerName: t('Tempo (bpm)'),
+			filter: 'agNumberColumnFilter',
+			cellEditor: 'agNumberCellEditor',
+			cellEditorParams: { min: 1, max: 999, precision: 0 },
+			valueParser: (params) => params.newValue === '' || params.newValue === null ? null : Number(params.newValue),
+		},
+		{
+			field: 'musicalKey',
+			headerName: t('Musical Key'),
+			valueParser: (params) => String(params.newValue ?? '').trim() || null,
+		},
 		{ field: 'medleyContents', headerName: t('Medley Contents'), valueParser: (params) => parseArrayValue(params.newValue) },
 		{ field: 'gemaIds', headerName: t('GEMA IDs'), valueParser: (params) => parseArrayValue(params.newValue) },
 		{
