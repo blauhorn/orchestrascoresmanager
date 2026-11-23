@@ -462,6 +462,12 @@ msgstr "Schwierigkeit"
 msgid "Duration"
 msgstr "Spieldauer"
 
+msgid "Tempo (bpm)"
+msgstr "Tempo (bpm)"
+
+msgid "Musical Key"
+msgstr "Tonart"
+
 msgid "Medley Contents"
 msgstr "Medley-Inhalt"
 
